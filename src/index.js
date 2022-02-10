@@ -57,21 +57,19 @@ module.exports = function toReadable(num) {
             ? tenToNinety[Math.floor(num / 10)]
             : tenToNinety[Math.floor(num / 10)] + " " + oneToNine[num % 10];
     }
-    
+
     if (100 <= num && num <= 999) {
         // console.log('(100 <= num <= 999)');
-      let hundred = oneToNine[Math.floor(num / 100)] + " hundred";
-      let dec = num % 100;
-      let whole = tenToNinety[Math.floor(dec / 10)];
-      // let wholeTwenToNinety = elevenToNineteen[dec - 10];
-      let wholePlusDec = whole + ' ' + oneToNine[dec % 10];
-      if (dec % 10 != 0) {
-          return hundred + ' ' + elevenToNineteen[dec - 10];
-        } else if (num % 100 === 0) {
+        let hundred = oneToNine[Math.floor(num / 100)] + " hundred";
+        let dec = num % 100;
+        let wholePlusDec =
+            tenToNinety[Math.floor(dec / 10)] + " " + oneToNine[dec % 10];
+        if (num % 100 === 0) {
             return hundred;
+        } else if (num % 100 != 0 && 10 <= dec && dec < 20) {
+            return hundred + " " + elevenToNineteen[dec - 10];
         } else {
-            return hundred +  ' ' + wholePlusDec;
-        } 
+            return hundred + " " + wholePlusDec;
+        }
     }
-    
 };
